@@ -172,8 +172,12 @@ class kmeans:
             print(key + "\t" + centroids_values)
             
             for index in self.cluster_dict[key]:
-                data_point = self.ids[index] + "\t" + "\t".join([str(value) for value in self.data[index]])
-                print(data_point)
+                if len(self.ids) == 0:
+                    data_point = "\t".join([str(value) for value in self.data[index]])
+                    print(data_point)
+                else:
+                    data_point = self.ids[index] + "\t" + "\t".join([str(value) for value in self.data[index]])
+                    print(data_point)
 
             
         
@@ -183,6 +187,7 @@ if __name__ == "__main__":
     #file = '../data/point100.lst'
     mykm = kmeans()
     mykm.load(file)
+    mykm.clusters = 3
     mykm.cluster()
     mykm.write()
 
