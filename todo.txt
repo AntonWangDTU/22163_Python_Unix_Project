@@ -5,8 +5,9 @@ Kode:
 - opdater README (Johan)
 - opdater examples (hvis muligt) med eksempler på outputs (screenshots osv.) (senere, hvis man har tid)
 - runtime analysis (Johan)
-- write (Johan)
+- write (Johan) - tjek
 - ændr navn til cluster.py - tjek
+- ændr tekst i begyndelsen af cluster.py hvis nødvendigt
 
 Rapport:
 - Introduction (senere)
