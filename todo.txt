@@ -6,7 +6,7 @@ Kode:
 - opdater examples (hvis muligt) med eksempler på outputs (screenshots osv.) (senere, hvis man har tid)
 - runtime analysis (Johan)
 - write (Johan)
-- ændr navn til cluster.py
+- ændr navn til cluster.py - tjek
 
 Rapport:
 - Introduction (senere)
