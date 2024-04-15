@@ -1,0 +1,26 @@
+Kode:
+- unittests (anton_test og johan_test (min. 4 test hver))
+    - lav tests + testdata
+- sammensætning af github (Anton)
+- opdater README (Johan)
+- opdater examples (hvis muligt) med eksempler på outputs (screenshots osv.) (senere, hvis man har tid)
+- runtime analysis (Johan)
+
+
+Rapport:
+- Introduction (senere)
+- Contribution (når man har tid)
+- Theory
+    - kmeans (Anton)
+    - kmeans++ (Johan)
+- Algorithm design (Johan)
+    - forklar kmeans og kmeans++ i overordnet pseudokode
+        - forklar probability distribution og random.choice i koden.
+- Program design (Anton)
+    - overblik over kodens dele
+- Program manual (Johan)
+    - Hvordan man bruger koden
+- Results (elbow plot, PCA plot) (Anton)
+- Runtime analysis (Big O) (Johan)
+- Conclusion (senere)
+- References (begge)
