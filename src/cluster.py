@@ -159,22 +159,8 @@ class kmeans:
         return self.cluster_dict, self.centroids
     
 
-    def write(self):
-        '''Prints the cluster assignments and centroids to standard output'''
-        for i, key in enumerate(self.cluster_dict.keys()):   
-            centroids_values = "\t".join([str(value) for value in self.centroids[i]])
-            print(key + "\t" + centroids_values)
-            for index in self.cluster_dict[key]:
-                if len(self.ids) == 0:
-                    data_point = "\t".join([str(value) for value in self.data[index]])
-                    print(data_point)
-                else:
-                    data_point = self.ids[index] + "\t" + "\t".join([str(value) for value in self.data[index]])
-                    print(data_point)
-    
-
-    def write_to_file(self, outfile = None):
-        '''Writes the cluster assignments and centroids to a file'''
+    def write(self, outfile):
+        '''Writes the cluster assignments and centroids to standard output or writes a new file if outfile is not None'''
         if outfile is None:
             outfile = sys.stdout
         else:
@@ -190,7 +176,7 @@ class kmeans:
                     data_point = self.ids[index] + "\t" + "\t".join([str(value) for value in self.data[index]])
                     outfile.write(data_point + "\n")
         if outfile is sys.stdout:
-            print("Data was written to standard output. If you want to write to a file, please provide a filename as an argument.")
+            print("Data was written to standard output. If you want to write to a file, please provide a filename as an argument. Example: mykm.write()")
         else:
             print("Data was written to " + outfile.name)
         outfile.close()
@@ -199,28 +185,33 @@ class kmeans:
      
 
 if __name__ == "__main__":
-    file = sys.argv[1]
-    #file = '../data/point100.lst'
+    # outfilename should be None if it is not given as an argument on the command line
+    outfilename = None
+
+    # Get command line arguments
+    if len(sys.argv) == 1:
+        filename = input("Please enter a data file: ")
+        clusters = input("Please enter number of clusters: ")
+    elif len(sys.argv) == 2:
+        filename = sys.argv[1]
+        clusters = input("Please enter number of clusters: ")
+    elif len(sys.argv) == 3:
+        filename = sys.argv[1]
+        clusters = sys.argv[2]
+    elif len(sys.argv) == 4:
+        filename = sys.argv[1]
+        clusters = sys.argv[2]
+        outfilename = sys.argv[3]
+    else:
+        sys.stderr.write("Usage: cluster.py <datafilename> <number of clusters> <name of outfile if wanted> \n")
+        sys.exit(1)
+
+    # Running kmeans algorithm with provided arguments (data, number of clusters, name of outfile if wanted)
     mykm = kmeans()
-    mykm.load(file)
-    mykm.clusters = int(sys.argv[2])
+    mykm.load(filename)
+    mykm.clusters = int(clusters)
     mykm.cluster()
-    #print(mykm.initial_centroids)
-    #print(mykm._pick_centroids_kmeans_plusplus())
-    #print(mykm._initialise_cluster_dict())
-    #mykm.write()
-    mykm.write_to_file()
-
-
-# Important notes for the programmer
-"""
-write_to_file should replace write?
-#####---
-Update text in the beginning
-Update README.md
-"""
-
-
+    mykm.write(outfilename)
 
 
 
