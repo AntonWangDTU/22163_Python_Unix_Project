@@ -212,8 +212,3 @@ if __name__ == "__main__":
     mykm.clusters = int(clusters)
     mykm.cluster()
     mykm.write(outfilename)
-
-
-
-
-
