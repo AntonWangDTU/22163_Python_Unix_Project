@@ -107,7 +107,7 @@ class kmeans:
         '''Initialises the cluster dict according to the designated amount of clusters assigned'''
         self.cluster_dict.clear()
         for i in range(self.clusters):
-            self.cluster_dict["Cluster-" + str(i+1)] = []
+            self.cluster_dict["Cluster-" + str(i+1)] = list()
         return self.cluster_dict
 
 
