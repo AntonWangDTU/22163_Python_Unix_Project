@@ -79,6 +79,12 @@ class kmeans:
         distance = np.sqrt(np.sum(squared_diff))
         return distance
     
+    def _pick_centroids_random(self):
+        '''Select the initial centroids randomly'''
+        centroid_ids = np.random.choice(self.data.shape[0], size = self.clusters, replace = False)
+        initial_centroids = [self.data[i] for i in centroid_ids]
+        return initial_centroids
+    
 
     def _pick_centroids_kmeans_plusplus(self):
         """Selects the initial centroids using the K-means++ algorithm"""
@@ -125,9 +131,6 @@ class kmeans:
         max_iterations = 200
         iteration = 0
         centroids = self._pick_centroids_kmeans_plusplus()
-
-
-
 
         while not convergence and iteration <= max_iterations:
             new_centroids = list()

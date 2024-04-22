@@ -10,7 +10,7 @@ import pytest
 from cluster import kmeans
 
 
-#test load funtion within kmeans class
+####test load funtion within kmeans class####
 
 #Test for empty file
 def test_load_empty():
@@ -33,4 +33,3 @@ def test_number_clusters():
     instance.clusters = 101
     with pytest.raises(ValueError):
         instance.cluster()
-
