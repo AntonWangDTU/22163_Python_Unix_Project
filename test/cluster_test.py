@@ -24,3 +24,13 @@ def test_comma_sep():
         instance.load("testdata/comma_sep.lst")
 
 
+
+
+#Check if it the porgram throws correct error if number of clusters given exceeds number of observations
+def test_number_clusters():
+    instance = kmeans()
+    instance.load("../data/point100.lst")
+    instance.clusters = 101
+    with pytest.raises(ValueError):
+        instance.cluster()
+

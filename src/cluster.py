@@ -115,11 +115,20 @@ class kmeans:
 
 
     def cluster(self):
-        '''The function that clusters the data points and updates the centroids until convergence is reached'''     
+        '''The function that clusters the data points and updates the centroids until convergence is reached'''   
+
+        #Error handling to make sure that number of clusters do not exceed number of observations:
+        if self.clusters > len(self.vector_list):
+            raise ValueError(f"Number of clusters must not exceed number of obervations which is: {len(self.vector_list)}")
+
         convergence = False
         max_iterations = 200
         iteration = 0
         centroids = self._pick_centroids_kmeans_plusplus()
+
+
+
+
         while not convergence and iteration <= max_iterations:
             new_centroids = list()
             self.cluster_dict = self._initialise_cluster_dict()
