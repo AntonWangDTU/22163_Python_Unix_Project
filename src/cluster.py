@@ -130,7 +130,8 @@ class kmeans:
         convergence = False
         max_iterations = 200
         iteration = 0
-        centroids = self._pick_centroids_kmeans_plusplus()
+        #centroids = self._pick_centroids_kmeans_plusplus()
+        centroids = self._pick_centroids_random()
 
         while not convergence and iteration <= max_iterations:
             new_centroids = list()
