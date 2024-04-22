@@ -43,15 +43,15 @@ class kmeans:
         self.ids.clear()
         try:
             infile = open(filename, "r")
-        except IndexError:
-            print("Usage: ")
-            sys.exit(1)
         except IOError as err:
             print(err)
             sys.exit(1)
         # Read the file and store the data (ids and coordinates/vector) in a list of lists
         for line in infile:
             line = line.split()
+            #Handling case where not tap seperated
+            if len(line) < 2:
+                raise ValueError("Incorrect file format")
             if re.search(r'[A-Za-z]+', line[0]):
                 # If the first element is a string, it is an id
                 vector = [float(n) for n in line[1:]]
@@ -62,13 +62,16 @@ class kmeans:
             self.vector_list.append(vector)
         infile.close()
         # Convert the list of lists to a numpy array
-        cols = len(self.vector_list[0])
-        rows = len(self.vector_list)
-        self.data = np.empty(shape=(rows, cols), dtype=np.float64)
-        for i in range(len(self.vector_list)):
-            self.data[i] = self.vector_list[i]
-        return self.data, self.ids
-    
+        try:
+            cols = len(self.vector_list[0])
+            rows = len(self.vector_list)
+            self.data = np.empty(shape=(rows, cols), dtype=np.float64)
+            for i in range(len(self.vector_list)):
+                self.data[i] = self.vector_list[i]
+            return self.data, self.ids
+        except IndexError:
+            raise ValueError("file is empty")
+
 
     def _euclidian(self, v, u):
         '''Calculate the euclidian distance between two vectors'''
