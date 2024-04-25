@@ -7,13 +7,16 @@ import re
 """
 This is a simple implementation of the k-means algorithm in Python.
 The algorithm is implemented in a class called kmeans. The class has
-three methods: load, cluster, and write. The load method reads data
+three normal methods: load, cluster, and write. The load method reads data
 from a file and stores it in a numpy array. The cluster method assigns
-data points to clusters and updates the centroids. The write method
-writes the cluster assignments and centroids to standard output.
-The class can be used as a standalone script by providing a filename
-and the number of clusters as command-line arguments. The class can
-also be imported into other scripts and used as a module.
+data points to clusters using the kmeans algorithm. The write method
+writes the cluster assignments to the chosen output (stdout or new file).
+The class also has four internal methods:
+_euclidian, _pick_centroids_random, _pick_centroids_kmeans_plusplus, and
+_initialise_cluster_dict.
+The class can be used as a standalone script by providing a filename and
+the number of clusters as command-line arguments. The class can also 
+be imported into other scripts and used as a module.
 See README.md for more information.
 """
 

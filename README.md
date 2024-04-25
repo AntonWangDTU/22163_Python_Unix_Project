@@ -1,3 +1,8 @@
+K-means clustering:
+The main goal of this project was to build a Python script with the ability to run the K-means algorithm.
+Furthermore, we wanted to improve the algorithm with the K-means++ method for picking initial centroids.
+
+
 About the kmer class:
 
 
