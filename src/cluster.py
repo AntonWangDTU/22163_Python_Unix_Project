@@ -43,6 +43,12 @@ class kmeans:
         self.ids.clear()
         try:
             infile = open(filename, "r")
+            # Check if the file is empty
+            first_line = infile.readline()
+            if not first_line:
+                raise ValueError("File is empty") 
+            # Reset the file pointer to the beginning of the file if it is not empty
+            infile.seek(0)
         except FileNotFoundError:
             print("Datafile not found. Please provide a valid filename.")
             sys.exit(1)
@@ -50,8 +56,12 @@ class kmeans:
             print(err)
             sys.exit(1)
         # Read the file and store the data (ids and coordinates/vector) in a list of lists
+        previous_vector = None
         for line in infile:
             line = line.split()
+            # Skip empty lines
+            if len(line) == 0:
+                continue
             # Handling case where not tap seperated, but comma seperated
             if len(line) < 2:
                 line = line[0].split(",")
@@ -62,18 +72,20 @@ class kmeans:
             else:
                 # If the first element is a number, there is no id
                 vector = [float(n) for n in line[:]]
+            # Check if dimensions are consistent
+            if previous_vector is not None and len(vector) != previous_vector:
+                raise ValueError("Inconsistent vector dimensions")
+            previous_vector = len(vector)
+            # Append the vector to the list of vectors
             self.vector_list.append(vector)
         infile.close()
         # Convert the list of lists to a numpy array
-        try:
-            cols = len(self.vector_list[0])
-            rows = len(self.vector_list)
-            self.data = np.empty(shape=(rows, cols), dtype=np.float64)
-            for i in range(len(self.vector_list)):
-                self.data[i] = self.vector_list[i]
-            return self.data, self.ids
-        except IndexError:
-            raise ValueError("File is empty")
+        cols = len(self.vector_list[0])
+        rows = len(self.vector_list)
+        self.data = np.empty(shape=(rows, cols), dtype=np.float64)
+        for i in range(len(self.vector_list)):
+            self.data[i] = self.vector_list[i]
+        return self.data, self.ids
 
 
     def _euclidian(self, v, u):
@@ -124,15 +136,24 @@ class kmeans:
 
 
     def cluster(self):
-        '''The function that clusters the data points and updates the centroids until convergence is reached'''   
-        # Error handling to make sure that number of clusters do not exceed number of observations:
+        '''The function that clusters the data points and updates the centroids until convergence is reached'''
+        # Error handling to make sure that data is loaded, number of clusters is provided as an integer above 0 and does not exceed number of observations:
+        if self.data.size == 0:
+            raise ValueError("No data loaded")
+        if self.clusters is None:
+            raise ValueError("Number of clusters must be provided")
+        if not isinstance(self.clusters, int):
+            raise ValueError("Number of clusters must be an integer")
         if self.clusters > len(self.vector_list):
             raise ValueError(f"Number of clusters must not exceed number of obervations which is: {len(self.vector_list)}")
+        if self.clusters == 0:
+            raise ValueError("Number of clusters must be greater than 0")
+        # Initialisation of variables
         convergence = False
         max_iterations = 200
         iteration = 0
-        #centroids = self._pick_centroids_kmeans_plusplus()
-        centroids = self._pick_centroids_random()
+        centroids = self._pick_centroids_kmeans_plusplus() 
+        # centroids = self._pick_centroids_random() # Uncomment this line to use random initialisation of centroids
         while not convergence and iteration <= max_iterations:
             new_centroids = list()
             self.cluster_dict = self._initialise_cluster_dict()
@@ -225,6 +246,9 @@ if __name__ == "__main__":
     # Running kmeans algorithm with provided arguments (data, number of clusters, name of outfile if wanted)
     mykm = kmeans()
     mykm.load(filename)
+    if not clusters.isdigit():
+        sys.stderr.write("Number of clusters must be an integer\n")
+        sys.exit(1)
     mykm.clusters = int(clusters)
     mykm.cluster()
     mykm.write(outfilename)
