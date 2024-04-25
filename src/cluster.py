@@ -198,10 +198,18 @@ class kmeans:
 
     def write(self, outfile):
         '''Writes the cluster assignments and centroids to standard output or writes a new file if outfile is not None'''
-        if outfile is None:
-            outfile = sys.stdout
-        else:
-            outfile = open(outfile, "w")
+        try:
+            if outfile is None:
+                outfile = sys.stdout
+            else:
+                outfile = open(outfile, "w")
+        except IOError as err:
+            print(err)
+            sys.exit(1)
+        # Error handling to make sure that clusters have been created before writing to file
+        if len(self.cluster_dict) == 0:
+            raise ValueError("No clusters have been assigned. Please run the cluster method before writing to file.")
+        # Write the cluster assignments and centroids to the output
         for i, key in enumerate(self.cluster_dict.keys()):   
             centroids_values = "\t".join([str(value) for value in self.centroids[i]])
             outfile.write(key + "\t" + centroids_values + "\n")
