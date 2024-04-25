@@ -43,15 +43,18 @@ class kmeans:
         self.ids.clear()
         try:
             infile = open(filename, "r")
+        except FileNotFoundError:
+            print("Datafile not found. Please provide a valid filename.")
+            sys.exit(1)
         except IOError as err:
             print(err)
             sys.exit(1)
         # Read the file and store the data (ids and coordinates/vector) in a list of lists
         for line in infile:
             line = line.split()
-            #Handling case where not tap seperated
+            # Handling case where not tap seperated, but comma seperated
             if len(line) < 2:
-                raise ValueError("Incorrect file format")
+                line = line[0].split(",")
             if re.search(r'[A-Za-z]+', line[0]):
                 # If the first element is a string, it is an id
                 vector = [float(n) for n in line[1:]]
@@ -70,7 +73,7 @@ class kmeans:
                 self.data[i] = self.vector_list[i]
             return self.data, self.ids
         except IndexError:
-            raise ValueError("file is empty")
+            raise ValueError("File is empty")
 
 
     def _euclidian(self, v, u):
@@ -122,17 +125,14 @@ class kmeans:
 
     def cluster(self):
         '''The function that clusters the data points and updates the centroids until convergence is reached'''   
-
-        #Error handling to make sure that number of clusters do not exceed number of observations:
+        # Error handling to make sure that number of clusters do not exceed number of observations:
         if self.clusters > len(self.vector_list):
             raise ValueError(f"Number of clusters must not exceed number of obervations which is: {len(self.vector_list)}")
-
         convergence = False
         max_iterations = 200
         iteration = 0
         #centroids = self._pick_centroids_kmeans_plusplus()
         centroids = self._pick_centroids_random()
-
         while not convergence and iteration <= max_iterations:
             new_centroids = list()
             self.cluster_dict = self._initialise_cluster_dict()
@@ -192,7 +192,7 @@ class kmeans:
                     data_point = self.ids[index] + "\t" + "\t".join([str(value) for value in self.data[index]])
                     outfile.write(data_point + "\n")
         if outfile is sys.stdout:
-            print("Data was written to standard output. If you want to write to a file, please provide a filename as an argument. Example: mykm.write()")
+            print("Data was written to standard output. If you want to write to a file, please provide an outfilename as an argument. Example: ./cluster.py " + filename + " " + clusters + " <name of outfile>")
         else:
             print("Data was written to " + outfile.name)
         outfile.close()
