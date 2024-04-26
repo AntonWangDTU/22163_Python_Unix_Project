@@ -15,15 +15,25 @@ The code is located in the "src"-folder with the filename "cluster.py". You can 
 
 ### Installing the Project
 
-The project can be installed code directly from Github, e.g., by downloading the page as a ZIP file or cloning using the web URL: https://github.com/AntonWangDTU/222110Project.git
+The project can be installed directly from Github, e.g., by downloading the page as a ZIP file or cloning using the web URL: https://github.com/AntonWangDTU/222110Project.git
 
 ### Data format
 
-The data should come in a list of data points - either tab or comma seperated. The data points may or may not have IDs. For example:
+The data should come in a list of data points - either tab or comma seperated. The data points may or may not have IDs. Examples:
 ```
 Point00	0.2605	0.6913	0.2874	0.4148
 Point01	0.7535	0.1888	0.6069	0.4798
 Point02	0.6464	0.4533	0.6959	0.9934
+```
+```
+Point00,0.2605,0.6913,0.2874,0.4148
+Point01,0.7535,0.1888,0.6069,0.4798
+Point02,0.6464,0.4533,0.6959,0.9934
+```
+```
+0.2605,0.6913,0.2874,0.4148
+0.7535,0.1888,0.6069,0.4798
+0.6464,0.4533,0.6959,0.9934
 ```
 ### Standalone script
 
@@ -31,19 +41,24 @@ You can run the k-means algorithm as a standalone script by providing a filename
 ```
 ./cluster.py data.lst 3 outfile.lst
 ```
-Here you run the algorithm with "data.lst" as the input data file with 3 clusters and saves the output in as "outfile.lst".
+Here you run the algorithm with "data.lst" as the input data file with 3 clusters and saves the output in a new file called "outfile.lst".
 
 ### Module import
 
 You can also import the kmeans class into other Python scripts and use it as a module. Here's an example which returns the same as in the standalone-example:
 
 ```
+import sys
+code_path = '<insert/path/to/code>'
+sys.path.append(code_path)
+
 from cluster import kmeans
 
 my_kmeans = kmeans()
 my_kmeans.load("data.lst")
 my_kmeans.clusters = 3
-my_kmeans.write("output.txt")
+my_kmeans.cluster()
+my_kmeans.write("outfile.lst")
 ```
 
 ## Requirements
