@@ -19,7 +19,7 @@ The project can be installed directly from Github, e.g., by downloading the page
 
 ### Data Format
 
-The data should come in a list of data points - either tab or comma seperated. The data points may or may not have IDs. Examples:
+The data should come in a list of data points - either tab or comma separated. The data points may or may not have IDs. Examples:
 ```
 Point00	0.2605	0.6913	0.2874	0.4148
 Point01	0.7535	0.1888	0.6069	0.4798
