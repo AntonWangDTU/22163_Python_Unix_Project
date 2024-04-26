@@ -8,6 +8,7 @@ Kode:
 - write (Johan) - tjek
 - ændr navn til cluster.py - tjek
 - ændr tekst i begyndelsen af cluster.py hvis nødvendigt
+- Omskriv så uden brug af forbudt pakke i pca.py
 
 Rapport:
 - Introduction (senere)
