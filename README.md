@@ -17,7 +17,7 @@ The code is located in the "src"-folder with the filename "cluster.py". You can 
 
 The project can be installed directly from Github, e.g., by downloading the page as a ZIP file or cloning using the web URL: https://github.com/AntonWangDTU/222110Project.git
 
-### Data format
+### Data Format
 
 The data should come in a list of data points - either tab or comma seperated. The data points may or may not have IDs. Examples:
 ```
@@ -35,7 +35,7 @@ Point02,0.6464,0.4533,0.6959,0.9934
 0.7535,0.1888,0.6069,0.4798
 0.6464,0.4533,0.6959,0.9934
 ```
-### Standalone script
+### Standalone Script
 
 You can run the k-means algorithm as a standalone script by providing a filename of your data and the number of desired clusters as command-line arguments. If you want to save the output in a new file, give the name of the output file as the third argument on the command line. Here is an example:
 ```
@@ -43,7 +43,7 @@ You can run the k-means algorithm as a standalone script by providing a filename
 ```
 Here you run the algorithm with "data.lst" as the input data file with 3 clusters and saves the output in a new file called "outfile.lst".
 
-### Module import
+### Module Import
 
 You can also import the kmeans class into other Python scripts and use it as a module. Here's an example which returns the same as in the standalone-example:
 
