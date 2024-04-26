@@ -253,13 +253,12 @@ if __name__ == "__main__":
     else:
         sys.stderr.write("Usage: cluster.py <datafilename> <number of clusters> <name of outfile if wanted> \n")
         sys.exit(1)
-
     # Running kmeans algorithm with provided arguments (data, number of clusters, name of outfile if wanted)
-    mykm = kmeans()
-    mykm.load(filename)
+    my_kmeans = kmeans()
+    my_kmeans.load(filename)
     if not clusters.isdigit():
         sys.stderr.write("Number of clusters must be an integer\n")
         sys.exit(1)
-    mykm.clusters = int(clusters)
-    mykm.cluster()
-    mykm.write(outfilename)
+    my_kmeans.clusters = int(clusters)
+    my_kmeans.cluster()
+    my_kmeans.write(outfilename)
