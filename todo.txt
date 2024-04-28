@@ -28,6 +28,4 @@ Rapport:
 - Conclusion (senere)
 - References (begge)
 
-Evt.:
-- 222110 - hvor kom det fra? Evt. skift navn til: 22163_Project_2_Kmeans
-- Brug cluster_test_johan.py i stedet for cluster_test.py
+
