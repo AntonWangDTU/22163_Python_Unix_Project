@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 from cluster import kmeans 
 
 
-
 def calculate_ssd(kmeans_instance):
+    # Calculate the sum of squared distances (SSD) for the current clustering
     ssd = 0
     for i, key in enumerate(kmeans_instance.cluster_dict.keys()):
         centroid = kmeans_instance.centroids[i]
@@ -17,7 +17,8 @@ def calculate_ssd(kmeans_instance):
 
 
 def elbow_plot(kmeans_instance, max_clusters):
-    ssd_values = []
+    # Generate an elbow plot for the given kmeans instance
+    ssd_values = list()
     for num_clusters in range(1, max_clusters + 1):
         print(num_clusters)
         kmeans_instance.clusters = num_clusters
@@ -32,12 +33,21 @@ def elbow_plot(kmeans_instance, max_clusters):
     for i, ssd in enumerate(ssd_values):
             ssd_sci = '{:.2e}'.format(ssd)
             plt.annotate(f'{ssd_sci}', (i + 1, ssd), textcoords="offset points", xytext=(0, 5), ha='center')
-    plt.savefig('../examples/elbow_random.png')
+    #plt.savefig("<path/to/save/folder/plot_name.png>") # Uncomment and provide path and name to save the plot as a .png file
     plt.show()
     plt.close()
 
+
 if __name__ == "__main__":
-    file = '../data/point1000.lst'
-    mykm = kmeans()
-    mykm.load(file)
-    elbow_plot(mykm, max_clusters=10)  # Change max_clusters as needed
+    if len(sys.argv) == 1:
+        filename = input("Please enter a data file: ")
+    elif len(sys.argv) == 2:
+        filename = sys.argv[1]
+    else:
+        sys.stderr.write("Usage: elbow_extension.py <datafilename> \n")
+        sys.exit(1)
+    # Running kmeans algorithm with provided data
+    my_kmeans = kmeans()
+    my_kmeans.load(filename)
+    # Generate elbow plot
+    elbow_plot(my_kmeans, max_clusters=10)  # Change max_clusters as needed
