@@ -1,31 +1,6 @@
-Kode:
-- unittests (anton_test og johan_test (min. 4 test hver)) - tjek
-    - lav tests + testdata - tjek
-- sammensætning af github (Anton) - tjek
-- opdater README (Johan) - tjek
-- opdater examples (hvis muligt) med eksempler på outputs (screenshots osv.) (senere, hvis man har tid) - tjek
-- runtime analysis (Johan)
-- write (Johan) - tjek
-- ændr navn til cluster.py - tjek
-- ændr tekst i begyndelsen af cluster.py hvis nødvendigt - tjek
-- Omskriv så uden brug af forbudt pakke i pca.py - tjek
-
-Rapport:
-- Introduction (senere)
-- Contribution (når man har tid)
-- Theory
-    - kmeans (Anton)
-    - kmeans++ (Johan)
-- Algorithm design (Johan)
-    - forklar kmeans og kmeans++ i overordnet pseudokode
-        - forklar probability distribution og random.choice i koden.
-- Program design (Anton)
-    - overblik over kodens dele
-- Program manual (Johan)
-    - Hvordan man bruger koden
-- Results (elbow plot, PCA plot) (Anton)
-- Runtime analysis (Big O) (Johan)
-- Conclusion (senere)
-- References (begge)
+- Streamline teksten
+- Indsæt underskrift-pdf
+- Indsæt navne på opgaven
+- Slet todo.txt
 
 
