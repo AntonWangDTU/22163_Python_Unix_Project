@@ -1,14 +1,14 @@
 Kode:
-- unittests (anton_test og johan_test (min. 4 test hver))
-    - lav tests + testdata
-- sammensætning af github (Anton)
-- opdater README (Johan)
-- opdater examples (hvis muligt) med eksempler på outputs (screenshots osv.) (senere, hvis man har tid)
+- unittests (anton_test og johan_test (min. 4 test hver)) - tjek
+    - lav tests + testdata - tjek
+- sammensætning af github (Anton) - tjek
+- opdater README (Johan) - tjek
+- opdater examples (hvis muligt) med eksempler på outputs (screenshots osv.) (senere, hvis man har tid) - tjek
 - runtime analysis (Johan)
 - write (Johan) - tjek
 - ændr navn til cluster.py - tjek
-- ændr tekst i begyndelsen af cluster.py hvis nødvendigt
-- Omskriv så uden brug af forbudt pakke i pca.py
+- ændr tekst i begyndelsen af cluster.py hvis nødvendigt - tjek
+- Omskriv så uden brug af forbudt pakke i pca.py - tjek
 
 Rapport:
 - Introduction (senere)
