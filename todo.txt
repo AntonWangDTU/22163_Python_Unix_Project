@@ -2,5 +2,6 @@
 - Indsæt underskrift-pdf
 - Indsæt navne på opgaven
 - Slet todo.txt
+- Lav Y-akse på Elbow plot om til E samt SSD i teksten
 
 
