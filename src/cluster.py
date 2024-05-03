@@ -156,7 +156,7 @@ class kmeans:
         max_iterations = 200
         iteration = 0
         centroids = self._pick_centroids_kmeans_plusplus() 
-        # centroids = self._pick_centroids_random() # Uncomment this line to use random initialisation of centroids
+        #centroids = self._pick_centroids_random() # Uncomment this line to use random initialisation of centroids
         while not convergence and iteration <= max_iterations:
             new_centroids = list()
             self.cluster_dict = self._initialise_cluster_dict()

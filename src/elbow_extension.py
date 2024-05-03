@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#! /usr/bin/env python3
 
 import sys 
 import numpy as np 
@@ -6,33 +6,34 @@ import matplotlib.pyplot as plt
 from cluster import kmeans 
 
 
-def calculate_ssd(kmeans_instance):
-    # Calculate the sum of squared distances (SSD) for the current clustering
-    ssd = 0
+def calculate_E(kmeans_instance):
+    # Calculate the sum-of-squares distances (E) for the current clustering
+    E = 0
     for i, key in enumerate(kmeans_instance.cluster_dict.keys()):
         centroid = kmeans_instance.centroids[i]
         for index in kmeans_instance.cluster_dict[key]:
-            ssd += np.sum((kmeans_instance.data[index] - centroid) ** 2)
-    return ssd
+            E += np.sum((kmeans_instance.data[index] - centroid) ** 2)
+    return E
 
 
 def elbow_plot(kmeans_instance, max_clusters):
     # Generate an elbow plot for the given kmeans instance
-    ssd_values = list()
+    E_values = list()
     for num_clusters in range(1, max_clusters + 1):
         print(num_clusters)
         kmeans_instance.clusters = num_clusters
         kmeans_instance.cluster()
-        ssd = calculate_ssd(kmeans_instance)
-        ssd_values.append(ssd)   
-    plt.plot(range(1, max_clusters + 1), ssd_values, marker='o')
-    plt.xlabel('Number of clusters')
-    plt.ylabel('Sum of Squared Distances (SSD)')
-    plt.title('Elbow Plot: Random')
+        E = calculate_E(kmeans_instance)
+        E_values.append(E)   
+    plt.plot(range(1, max_clusters + 1), E_values, marker='o')
+    plt.xlabel('Number of clusters (K)')
+    plt.ylabel('Sum-of-Squares (E)')
+    plt.title('Elbow Plot: K-means++')
+    #plt.title('Elbow Plot: Random') # Uncomment for Random initialization of centroids
     #For adding data to the points
-    for i, ssd in enumerate(ssd_values):
-            ssd_sci = '{:.2e}'.format(ssd)
-            plt.annotate(f'{ssd_sci}', (i + 1, ssd), textcoords="offset points", xytext=(0, 5), ha='center')
+    for i, E in enumerate(E_values):
+            E_sci = '{:.2e}'.format(E)
+            plt.annotate(f'{E_sci}', (i + 1, E), textcoords="offset points", xytext=(0, 5), ha='center')
     #plt.savefig("<path/to/save/folder/plot_name.png>") # Uncomment and provide path and name to save the plot as a .png file
     plt.show()
     plt.close()
